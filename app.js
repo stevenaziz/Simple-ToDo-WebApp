@@ -34,7 +34,7 @@ app.get("/tm/tasks", async (req,res)=>{
 });
 
 // get one task
-// use mongoose findOne() function for this
+// use mongoose findOne() function for this, or use findById
 
 // add a task
 app.post("/tm/tasks", async (req,res)=>{
@@ -51,6 +51,14 @@ app.post("/tm/tasks", async (req,res)=>{
 
 // delete a task
 // use mongoose findOneAndDelete function for this
+app.delete("/tm/tasks/:id", async (req, res) => {
+  try {
+    const task = await tasks.findOneAndDelete({ _id: req.params.id });
+    res.status(200).json("Task was deleted");
+  } catch (error) {
+    res.status(404).json({error});
+  };
+ });
 
 // Connect to the database and start the appl server
 const start = async () => {
