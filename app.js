@@ -17,9 +17,9 @@ const tasks = require("./Task");
 
 // Routes
 // app.get("/tm/tasks")        - get all the tasks
-// app.get("/tm/tasks/:id")    - get a task
+// app.getone("/tm/tasks/:id")    - get a task
 // app.post("/tm/tasks")       - add a new task
-// app.patch("/tm/tasks/:id")  - update a task
+// app.updateTask("/tm/tasks/:id")  - update a task
 // app.delete("/tm/tasks/:id") - delete a task
 
 
@@ -35,6 +35,14 @@ app.get("/tm/tasks", async (req,res)=>{
 
 // get one task
 // use mongoose findOne() function for this
+app.getone("/tm/tasks/:id", async(req,res)=>{
+  try{
+    const task = await tasks.findById({ _id: req.params.id });
+    res.status(200).json({task});
+  } catch(error){
+    res.status(500).json({msg: error});
+  };
+});
 
 // add a task
 app.post("/tm/tasks", async (req,res)=>{
@@ -48,6 +56,15 @@ app.post("/tm/tasks", async (req,res)=>{
 
 // update a task
 // use mongoose fineOneAndUpdate function for this
+app.updateTask( "/tm/tasks/:id" ,async (req, res) => {
+ try {
+   const task = await tasks.findByIdAndUpdate({ _id: req.params.id }, {name:req.params.name , completed: req.params.completed});
+   res.status(200).json(task);
+  } catch (error) {
+   res.status(404).json({ success: false, error }); 
+  }
+ })
+
 
 // delete a task
 // use mongoose findOneAndDelete function for this
