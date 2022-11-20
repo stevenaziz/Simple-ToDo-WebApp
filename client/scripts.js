@@ -8,11 +8,11 @@ const result = document.querySelector(".result");
 const input =  document.querySelector("#listitem");
 const formAlert =  document.querySelector(".form-alert");
 const addButton =  document.querySelector(".add-btn");
-const delButton =  document.querySelector(".del-btn");
 
 // Listeners
-addButton.addEventListener("click", httpPost);
 delButton.addEventListener("click", httpDelete);
+addButton.addEventListener("click", httpPost);
+checkedButton.addEventListener("click", httpPut);
 
 /* Helper Functions */
 function ShowList() {
@@ -26,13 +26,13 @@ function ShowList() {
 
 // Gets the data as an array from server and modifies HTML to show it
 async function GetList() {
-  theList = await http.get("/api");
+  theList = await http.get("/tm/tasks");
   ShowList();
 }
 
 // Sends a POST request to the server to rewrite the data and waits for a response before updating HTML with new data
 async function WriteList() {
-  await http.post("/api", theList);
+  await http.post("/tm/tasks", theList);
   ShowList();
 }
 
