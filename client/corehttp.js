@@ -20,9 +20,6 @@ class coreHTTP {
     if (res.status >= 400) {
       throw Error(res.status)
     }
-    // if (response header content is json) {
-    //   return res.json()
-    // }
   }
 
   // Make an HTTP PUT request

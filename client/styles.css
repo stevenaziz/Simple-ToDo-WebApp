@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400|Inconsolata:400');
+
 *,
 ::after,
 ::before {
   box-sizing: border-box;
 }
+
 :root {
   /* COLORS  */
   /* primary */
@@ -71,6 +73,7 @@
     --defaultFontSize: 100%;
   }
 }
+
 @media only screen and (min-width: 768px) {
   :root {
     --defaultFontSize: 112.5%;
@@ -83,57 +86,19 @@ body {
   font-family: var(--bodyFont);
   font-weight: 400;
   line-height: 1.75;
-}
-
-p {
-  margin-bottom: 1rem;
-  max-width: 40em;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5 {
-  margin: 0;
-  margin-bottom: 0.75rem;
-  font-family: var(--headingFont);
-  font-weight: 400;
-  line-height: 1.3;
-  text-transform: capitalize;
+  padding: 2rem;
 }
 
 h1 {
   font-size: 3.052rem;
+  margin-bottom: 0.75rem;
+  font-family: var(--headingFont);
+  font-weight: 400;
+  line-height: 1.3;
 }
 
-h2 {
-  font-size: 2.441rem;
-}
-
-h3 {
-  font-size: 1.953rem;
-}
-
-h4 {
-  font-size: 1.563rem;
-}
-
-h5 {
-  font-size: 1.25rem;
-}
-
-small,
-.text_small {
+small {
   font-size: var(--smallText);
-}
-
-ul {
-  padding: 0;
-  list-style-type: none;
-}
-a {
-  text-decoration: none;
 }
 
 form {
@@ -142,41 +107,30 @@ form {
   border-radius: var(--borderRadius);
   box-shadow: var(--shadow-2);
   padding: 2rem 2.5rem;
-}
-label {
-  display: block;
-  font-size: var(--smallText);
-  margin-bottom: 0.5rem;
-  text-transform: capitalize;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
 }
 
-input,
-textarea {
-  width: 100%;
+.form-input {
+  min-width: 60%;
+  margin: 0 0 1rem;
+}
+
+label {
+  font-size: 1rem;
+  margin: 0 0 0.5rem 0.5rem;
+}
+
+input {
   padding: 0.375rem 0.75rem;
   border-radius: var(--borderRadius);
   background: var(--grey-50);
   border-color: transparent;
   border: 1px solid var(--grey-300);
 }
-.form-row {
-  margin-bottom: 1rem;
-}
-textarea {
-  width: 100%;
-  height: 7rem;
-}
 
-::placeholder {
-  color: var(--grey-600);
-}
-
-hr {
-  border-top: var(--line);
-}
-
-button,
-.btn {
+button {
   cursor: pointer;
   appearance: none;
   color: var(--white);
@@ -189,163 +143,98 @@ button,
   transition: var(--transition);
   text-transform: capitalize;
 }
-button:hover,
-.btn:hover {
+
+button:hover {
   color: var(--white);
   background: var(--primary-700);
   box-shadow: var(--shadow-2);
 }
-button.small {
-  padding: 0.25rem 0.5rem;
-  font-size: var(--smallText);
-}
-
-button.block {
-  width: 100%;
-}
 
 /* Basic Classes */
 
-.alert {
-  padding: 0.375rem 0.75rem;
-  margin-bottom: 1rem;
-  border-color: transparent;
-  border-radius: var(--borderRadius);
-}
-
-.alert-success {
-  color: var(--green-dark);
-  background-color: var(--green-light);
-}
-.alert-danger {
-  color: var(--red-dark);
-  background-color: var(--red-light);
-}
-
-.container {
-  padding: 5rem 0;
-}
-.container-center {
-  width: 90vw;
-  max-width: var(--max-width);
-  margin: 0 auto;
-}
 @media only screen and (min-width: 992px) {
   .container-center {
     width: 95vw;
   }
 }
 
-.title {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-.title-underline {
-  height: 0.2rem;
-  width: 7rem;
-  background: var(--primary-6);
-  margin: 0 auto;
-}
-
-/* loading */
-@keyframes spinner {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.loading {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  border: 3px solid #ccc;
-  border-top-color: var(--clr-primary-5);
-  animation: spinner 0.6s linear infinite;
-}
-
 /* form loading */
 
-.form-loading {
-  position: relative;
-}
-.form-loading::before {
-  background: var(--white);
-  position: absolute;
-  content: '';
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  border-radius: var(--borderRadius);
-  opacity: 0.8;
-}
-@keyframes spinner {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.form-loading::after {
-  content: '';
-  position: absolute;
-  top: calc(50% - 3rem);
-  left: calc(50% - 3rem);
-  width: 6rem;
-  height: 6rem;
-  border-radius: 50%;
-  border: 3px solid #ccc;
-  border-top-color: var(--clr-primary-5);
-  animation: spinner 0.6s linear infinite;
-}
-
-form {
-  width: 90vw;
-  max-width: 600px;
-  margin: 0 auto;
-  margin-top: 5rem;
-}
-nav {
-  height: 4rem;
-  background: var(--primary-500);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.nav-center {
-  display: flex;
-  width: 90vw;
-  max-width: 600px;
-  align-items: center;
-  justify-content: space-between;
-}
-.nav-center,
-.nav-center a {
-  color: var(--white);
-}
-.nav-center h5 {
-  margin-bottom: 0;
-  font-weight: 700;
-}
-.nav-center a + a {
-  margin-left: 1rem;
-}
-.nav-center {
-  text-transform: capitalize;
-}
-
 .result {
-  margin-top: 2rem;
+  text-align: center;
+  margin-top: 5rem;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: center;
+  flex-wrap: nowrap;
 }
-h5 + h5 {
-  margin-left: 1rem;
-}
+
 .form-alert {
   color: var(--red-dark);
   text-transform: capitalize;
 }
-.alert-danger {
-  width: 600px;
-  text-align: center;
+
+form>input[type=button] {
+  float: right;
+  color: red;
+  background: none;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  transition: 0.2s;
+}
+
+form>input[type=button]:hover {
+  background-color: red;
+  color: white;
+}
+
+.list-item {
+  border-top: 3px solid white;
+  border-radius: 0;
+  border-bottom: 3px solid white;
+  background-color: rgb(240, 240, 240);
+}
+.striked {
+  text-decoration: line-through;
+}
+.add-btn {
+  font-size: 1rem;
+  font-weight: bold;
+}
+.confirmation-msg {
+  text-align: left;
+  background-color: white;
+  padding: 30px;
+  font-family: var(--headingFont);
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: var(--borderRadius);
+}
+.confirmation-msg>h3 {
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1.3;
+}
+.confirmation-msg>p {
+  font-size: 1.5rem;
+}
+.delete {
+  background-color: red;
+  color: white;
+  transition: .2s;
+  float: right;
+}
+.delete:hover {
+  background-color: var(--red-dark);
+}
+.cancel {
+  background-color: gray;
+  color: white;
+  float: left;
+  transition: .2s;
+}
+.cancel:hover {
+  background-color: var(--grey-1000);
 }
