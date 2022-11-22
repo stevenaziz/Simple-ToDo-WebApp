@@ -8,39 +8,43 @@ const result = document.querySelector(".result");
 const input =  document.querySelector("#listitem");
 const formAlert =  document.querySelector(".form-alert");
 const addButton =  document.querySelector(".add-btn");
-const delButton =  document.querySelector(".del-btn");
 
 // Listeners
-addButton.addEventListener("click", httpPost);
+addButton.addEventListener("click", AddTask);
 
 /* Helper Functions */
-function ShowList() {
-  let output;
-  for (const itm of theList) {
-    output += `<form class="list-item">`;
-    output += `<input type="checkbox" name="${itm.id}" id="${itm.id}">`
-    output += `<label for="${itm.id}">${itm.name}</label>`
-    output =+ `<input type="button" value="X">`
+function ShowTasks() {
+  let output = "";
+  let currTask;
+  for (currTask = 0; currTask < theList.length; currTask++) { // repeat for each task item
+    output += `<form id="${theList[currTask]._id}" class="list-item">`; // create form tag
+    if (theList[currTask].checked) { // check whether the task is completed
+      output += `<input type="checkbox" name="${currTask}" id="${currTask}" checked onchange="UpdateTask(this)"/>`; // if task is completed, add a checked checkbox and strike the name
+      output += `<label for="${currTask}" class="striked">${theList[currTask].name}</label>`;
+    }
+    else {
+      output += `<input type="checkbox" name="${currTask}" id="${currTask}" onchange="UpdateTask(this)"/>`; // if task is not completed, add blank checkbox and normal text for the name
+      output += `<label for="${currTask}">${theList[currTask].name}</label>`;
+    }
+    output += `<input type="button" value="X" onclick="DeleteTask(this)"/>`; // Add the delete button for the task
     output += "</form>";
   }
   result.innerHTML = output;
 }
 
 // Gets the data as an array from server and modifies HTML to show it
-async function GetList() {
-  console.log(await http.get("/tm/tasks"));
-  //console.log(theList);
-  //ShowList();
-}
-
-// Sends a POST request to the server to rewrite the data and waits for a response before updating HTML with new data
-async function WriteList() {
-  await http.post("/api", theList);
-  ShowList();
+async function GetTasks() {
+  let res = await http.get("/tm/tasks");
+  if (!res) {
+    result.innerHTML = "You have no remaining tasks."
+    return;
+  }
+  theList = res.task;
+  ShowTasks();
 }
 
 /* Listener Functions */
-async function httpPost(e) {
+async function AddTask(e) {
   e.preventDefault(); // Prevent the browser from creating its own request to the server
   if (input.value == "") { // If there is no input, prompt user for input and return
     formAlert.innerText = "Please enter a valid input.";
@@ -49,37 +53,27 @@ async function httpPost(e) {
     }, 2000);
     return;
   }
-  theList[theList.length] = input.value; // Add data to POST to array
-  await WriteList(); // Send new array to server for POST
+  let newTask = { // create task object
+    name: input.value,
+    checked: false
+  };
+  await http.post("/tm/tasks", newTask); // send POST request for the new task
+  await main(); // Rewrite the tasks
   input.value = ""; // Clear input field
 }
 
-async function httpDelete(e) {
-  e.preventDefault(); // Prevent the browser from creating its own request to the server
-  if (input.value == "") { // If there is no input, prompt user for input and return
-    formAlert.innerText = "Please enter a valid input.";
-    setTimeout(() => {
-      formAlert.innerText = "";
-    }, 2000);
-    return;
-  }
-  theListOrigLength = theList.length; // Take note of the length of the array before beginning delete
-  for (let i = 0; i < theList.length; i++) { // Iterate through array and delete any entry that matches search query
-    if (theList[i] == input.value) {
-      theList.splice(i, 1); // Remove one entry from array at position i
-      i--; // Roll i back if an entry is deleted so that the entry that takes its place is checked, also
-    }
-  }
-  if (theListOrigLength == theList.length) { // If the array's original length is the same as the array's length now then no elements were deleted -> search query was invalid
-    formAlert.innerText = "The value you entered does not exist. Please try again.";
-    input.value = "";
-    setTimeout(() => {
-      formAlert.innerText = "";
-    }, 2000);
-    return;
-  }
-  await WriteList(); // With the updated array now completed, wait for POST request to be sent to server
-  input.value = ""; // Clear input field
+async function DeleteTask(object) {
+  await http.delete(`/tm/tasks/${object.parentElement.id}`);
+  await main();
+}
+
+async function UpdateTask(object) {
+  let updatedTask = {
+    name: object.nextSibling.innerText,
+    checked: object.checked
+  };
+  await http.put(`/tm/tasks/${object.parentElement.id}`, updatedTask);
+  object.nextSibling.classList.toggle("striked");
 }
 
 // Loading functions
@@ -91,7 +85,7 @@ async function main() {
   addButton.disabled = true;
   showLoading();
 
-  await GetList();
+  await GetTasks();
 
   addButton.disabled = false;
 }
