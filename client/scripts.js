@@ -51,7 +51,7 @@ async function AddTask(e) {
     formAlert.innerText = "Please enter a valid input.";
     setTimeout(() => {
       formAlert.innerText = "";
-    }, 2000);
+    }, 5000);
     return;
   }
   let newTask = { // create task object

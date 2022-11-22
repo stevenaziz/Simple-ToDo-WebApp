@@ -99,6 +99,7 @@ h1 {
 
 small {
   font-size: var(--smallText);
+  display: block;
 }
 
 form {
@@ -177,17 +178,18 @@ button:hover {
 
 form>input[type=button] {
   float: right;
-  color: red;
-  background: none;
-  font-size: 1rem;
+  color: white;
+  background-color: red;
+  font-size: 0.8rem;
   font-weight: bold;
   border: none;
+  box-shadow: var(--shadow-1);
   transition: 0.2s;
 }
 
 form>input[type=button]:hover {
-  background-color: red;
-  color: white;
+  background-color: var(--red-dark);
+  box-shadow: var(--shadow-4);
 }
 
 .list-item {
@@ -224,18 +226,22 @@ form>input[type=button]:hover {
 .delete {
   background-color: red;
   color: white;
+  box-shadow: var(--shadow-1);
   transition: .2s;
   float: right;
 }
 .delete:hover {
   background-color: var(--red-dark);
+  box-shadow: var(--shadow-4);
 }
 .cancel {
   background-color: gray;
   color: white;
+  box-shadow: var(--shadow-1);
   float: left;
   transition: .2s;
 }
 .cancel:hover {
   background-color: var(--grey-1000);
+  box-shadow: var(--shadow-4);
 }
