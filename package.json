@@ -1,16 +1,23 @@
 {
-  "name": "mongo",
+  "name": "csc-3221-project-two",
   "version": "1.0.0",
-  "description": "",
-  "main": "Task.js",
+  "description": "Simple To-Do Web App",
+  "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stevenaziz/CSC-3221-Project-Two.git"
   },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stevenaziz/CSC-3221-Project-Two/issues"
+  },
+  "homepage": "https://github.com/stevenaziz/CSC-3221-Project-Two#readme",
   "dependencies": {
-    "express": "^4.18.1",
-    "mongoose": "^6.3.4"
+    "express": "^4.18.2",
+    "mongoose": "^6.7.2"
   }
 }
