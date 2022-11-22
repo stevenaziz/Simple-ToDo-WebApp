@@ -26,6 +26,7 @@ function ShowTasks() {
       output += `<input type="checkbox" name="${currTask}" id="${currTask}" onchange="UpdateTask(this)"/>`; // if task is not completed, add blank checkbox and normal text for the name
       output += `<label for="${currTask}">${theList[currTask].name}</label>`;
     }
+    // output += "<input type='button' value='Edit' onclick=''/>"; for implementing the bonus edit task feature
     output += `<input type="button" value="X" onclick="DeleteTask(this)"/>`; // Add the delete button for the task
     output += "</form>";
   }
