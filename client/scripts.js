@@ -63,8 +63,16 @@ async function AddTask(e) {
 }
 
 async function DeleteTask(object) {
-  await http.delete(`/tm/tasks/${object.parentElement.id}`);
-  await main();
+  result.innerHTML = "<div class='confirmation-msg'><h3>Are you sure you want to delete this task?</h3><p>This action is final and cannot be undone.</p><button class='cancel'>Cancel</button><button class='delete'>Continue</button></div>";
+  const delBtn = document.querySelector(".delete");
+  const cnclBtn = document.querySelector(".cancel");
+  delBtn.addEventListener("click", async () => {
+    await http.delete(`/tm/tasks/${object.parentElement.id}`);
+    await main();
+  });
+  cnclBtn.addEventListener("click", async () => {
+    await main();
+  });
 }
 
 async function UpdateTask(object) {

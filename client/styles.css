@@ -91,7 +91,7 @@ body {
 
 h1 {
   font-size: 3.052rem;
-  margin-bottom: 0.75rem 0;
+  margin-bottom: 0.75rem;
   font-family: var(--headingFont);
   font-weight: 400;
   line-height: 1.3;
@@ -113,13 +113,13 @@ form {
 }
 
 .form-input {
-  width: 100%;
+  min-width: 60%;
   margin: 0 0 1rem;
 }
 
 label {
-  font-size: var(--smallText);
-  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  margin: 0 0 0.5rem 0.5rem;
 }
 
 input {
@@ -165,8 +165,9 @@ button:hover {
   margin-top: 5rem;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   align-content: center;
-  justify-content: center;
+  flex-wrap: nowrap;
 }
 
 .form-alert {
@@ -178,6 +179,7 @@ form>input[type=button] {
   float: right;
   color: red;
   background: none;
+  font-size: 1rem;
   font-weight: bold;
   border: none;
   transition: 0.2s;
@@ -191,9 +193,48 @@ form>input[type=button]:hover {
 .list-item {
   border-top: 3px solid white;
   border-radius: 0;
-  border-bottom: 6px solid white;
-  background-color: rgb(235, 235, 235);
+  border-bottom: 3px solid white;
+  background-color: rgb(240, 240, 240);
 }
 .striked {
   text-decoration: line-through;
+}
+.add-btn {
+  font-size: 1rem;
+  font-weight: bold;
+}
+.confirmation-msg {
+  text-align: left;
+  background-color: white;
+  padding: 30px;
+  font-family: var(--headingFont);
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: var(--borderRadius);
+}
+.confirmation-msg>h3 {
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1.3;
+}
+.confirmation-msg>p {
+  font-size: 1.5rem;
+}
+.delete {
+  background-color: red;
+  color: white;
+  transition: .2s;
+  float: right;
+}
+.delete:hover {
+  background-color: var(--red-dark);
+}
+.cancel {
+  background-color: gray;
+  color: white;
+  float: left;
+  transition: .2s;
+}
+.cancel:hover {
+  background-color: var(--grey-1000);
 }
