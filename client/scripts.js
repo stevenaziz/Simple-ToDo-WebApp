@@ -73,7 +73,7 @@ async function DeleteTask(object) {
     await main();
   });
   cnclBtn.addEventListener("click", async () => {
-    result.innerHTML = currTask;
+    result.innerHTML = currTasks;
   });
 }
 
