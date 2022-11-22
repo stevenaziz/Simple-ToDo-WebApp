@@ -36,11 +36,11 @@ function ShowTasks() {
 // Gets the data as an array from server and modifies HTML to show it
 async function GetTasks() {
   let res = await http.get("/tm/tasks");
-  if (!res) {
+  theList = res.task;
+  if (theList.length == 0) {
     result.innerHTML = "You have no remaining tasks."
     return;
   }
-  theList = res.task;
   ShowTasks();
 }
 
@@ -64,6 +64,7 @@ async function AddTask(e) {
 }
 
 async function DeleteTask(object) {
+  currTasks = result.innerHTML;
   result.innerHTML = "<div class='confirmation-msg'><h3>Are you sure you want to delete this task?</h3><p>This action is final and cannot be undone.</p><button class='cancel'>Cancel</button><button class='delete'>Continue</button></div>";
   const delBtn = document.querySelector(".delete");
   const cnclBtn = document.querySelector(".cancel");
@@ -72,7 +73,7 @@ async function DeleteTask(object) {
     await main();
   });
   cnclBtn.addEventListener("click", async () => {
-    await main();
+    result.innerHTML = currTask;
   });
 }
 
