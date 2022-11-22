@@ -211,6 +211,7 @@ form>input[type=button]:hover {
   max-width: 600px;
   margin: 0 auto;
   border-radius: var(--borderRadius);
+  box-shadow: var(--shadow-3);
 }
 .confirmation-msg>h3 {
   font-size: 2rem;
