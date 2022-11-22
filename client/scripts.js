@@ -8,31 +8,34 @@ const result = document.querySelector(".result");
 const input =  document.querySelector("#listitem");
 const formAlert =  document.querySelector(".form-alert");
 const addButton =  document.querySelector(".add-btn");
+const delButton =  document.querySelector(".del-btn");
 
 // Listeners
-delButton.addEventListener("click", httpDelete);
 addButton.addEventListener("click", httpPost);
-checkedButton.addEventListener("click", httpPut);
 
 /* Helper Functions */
 function ShowList() {
-  let output = "<ul>";
+  let output;
   for (const itm of theList) {
-    output += `<li>${itm}</li>`;
+    output += `<form class="list-item">`;
+    output += `<input type="checkbox" name="${itm.id}" id="${itm.id}">`
+    output += `<label for="${itm.id}">${itm.name}</label>`
+    output =+ `<input type="button" value="X">`
+    output += "</form>";
   }
-  output += "</ul>";
   result.innerHTML = output;
 }
 
 // Gets the data as an array from server and modifies HTML to show it
 async function GetList() {
-  theList = await http.get("/tm/tasks");
-  ShowList();
+  console.log(await http.get("/tm/tasks"));
+  //console.log(theList);
+  //ShowList();
 }
 
 // Sends a POST request to the server to rewrite the data and waits for a response before updating HTML with new data
 async function WriteList() {
-  await http.post("/tm/tasks", theList);
+  await http.post("/api", theList);
   ShowList();
 }
 
@@ -86,13 +89,11 @@ function showLoading() {
 
 async function main() {
   addButton.disabled = true;
-  delButton.disabled = true;
   showLoading();
 
   await GetList();
 
   addButton.disabled = false;
-  delButton.disabled = false;
 }
 
 main();
