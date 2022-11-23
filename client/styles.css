@@ -173,7 +173,6 @@ button:hover {
 
 .form-alert {
   color: var(--red-dark);
-  text-transform: capitalize;
 }
 
 form>input[type=button] {
@@ -193,13 +192,12 @@ form>input[type=button]:hover {
 }
 
 .list-item {
-  border-top: 3px solid white;
-  border-radius: 0;
-  border-bottom: 3px solid white;
-  background-color: rgb(240, 240, 240);
+  border-bottom: 2px solid var(--primary-700);
+  background-color: white;
 }
 .striked {
   text-decoration: line-through;
+  color: var(--grey-700);
 }
 .add-btn {
   font-size: 1rem;
