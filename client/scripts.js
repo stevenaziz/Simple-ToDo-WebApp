@@ -26,7 +26,6 @@ function ShowTasks() {
       output += `<input type="checkbox" name="${currTask}" id="${currTask}" onchange="UpdateTask(this)"/>`; // if task is not completed, add blank checkbox and normal text for the name
       output += `<label for="${currTask}">${theList[currTask].name}</label>`;
     }
-    // output += "<input type='button' value='Edit' onclick=''/>"; for implementing the bonus edit task feature
     output += `<input type="button" value="X" onclick="DeleteTask(this)"/>`; // Add the delete button for the task
     output += "</form>";
   }
@@ -52,6 +51,14 @@ async function AddTask(e) {
     setTimeout(() => {
       formAlert.innerText = "";
     }, 5000);
+    return;
+  }
+  if (input.value.length > 50) { // If the input is too long (>50 chars), prompt user for new input and return
+    formAlert.innerText = "The task may not contain more than 50 characters. Please choose a shorter name and try again.";
+    input.value = "";
+    setTimeout(() => {
+      formAlert.innerText = "";
+    }, 10000);
     return;
   }
   let newTask = { // create task object
